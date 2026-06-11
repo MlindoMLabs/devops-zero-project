@@ -1,0 +1,19 @@
+name: Devops Pipeline
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: checkout code
+      uses: actions/checkout@v3
+
+    - name: Build Docker Image
+      run: docker build -t devops-zero .
+
+    - name: Run Container Test
+      run: docker run -d -p 3000:3000 devops-zero 
